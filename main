@@ -1,0 +1,80 @@
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+WindUI:AddTheme({
+    Name = "+", -- theme name
+    
+    Accent = Color3.new("1,1,1"),
+    Background = Color3.new("1,1,1"), -- Accent
+    Outline = Color3.new("0,0,0"),
+    Text = Color3.new("0,0,0"),
+    Placeholder = Color3.new("1,1,1"),
+    Button = Color3.new("1,1,1"),
+    Icon = Color3.new("1,1,1"),
+})
+
+WindUI:SetTheme("+")
+
+local Window = WindUI:CreateWindow({
+    Title = "aura latch",
+    Author = "raul",
+})
+Window:EditOpenButton({
+    Title = "Open",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 0,
+    OnlyMobile = false,
+    Enabled = true,
+    Draggable = true,
+})
+
+local Themes = {
+    Kiyora = {
+        Icon = 8508980536,
+        Variants = {
+            ["Variant 1"]= {
+                {Title = "Helter Edge", Id = 8508980536, OverwriteId = 0}
+            },
+            ["Variant 2"]= {
+                {Title = "Breakdance", Id = 8508980536, OverwriteId = 0}
+            }
+        }
+    },
+    Don = {
+        Icon = 8508980536,
+        Variants = {
+            ["Default"]= {
+                {Title = "Axel Avix", Id = 8508980536, OverwriteId = 0}
+            },
+            ["Overtime"]= {
+                {Title = "Placeholder", Id = 8508980536, OverwriteId = 0}
+            }
+        }
+    }
+}
+
+local ThemesSection = Window:Section({
+    Title = "Flow Themes",
+})
+
+for Title, Data in Themes do
+    local Tab = ThemesSection:Tab({
+        Title = Title,
+        Icon = "rbxassetid://"..Data.Icon
+    })
+
+    for VariantName, Themes in Data.Variants do
+        local Section = Tab:Section({
+                Title = VariantName
+            })
+
+        for _, ThemeData in Themes do
+            local Section = Tab:Toggle({
+                Title = ThemeData.Title
+            })
+
+            Callback = function(State)
+                print(State)
+            end
+        end
+    end    
+end
