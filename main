@@ -1,4 +1,6 @@
-local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raulington4/auralatch/refs/heads/main/windmod"))()
+local Mod = false
+
+WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Raulington4/auralatch/refs/heads/main/"..(Mod and "windmod" or "wind"))()
 
 WindUI:AddTheme({
     Name = "+", -- theme name
