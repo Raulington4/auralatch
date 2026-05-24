@@ -14,76 +14,18 @@
     License: MIT
 ]]
 
-
--- ┌─────────────────────────────────────────────────────────────────────┐
--- │  WindUI Module Index                                                │
--- │  Each function in Modules.XXX() is a lazy-loaded sub-module.       │
--- │  Modules.load("Name") calls the factory once, then caches it.      │
--- ├────────────────────┬────────────────────────────────────────────────┤
--- │  Key               │  Purpose                                       │
--- ├────────────────────┼────────────────────────────────────────────────┤
--- │  Icons             │  Icon/spritesheet system (GetIcons RF)         │
--- │  DefaultThemeColors│  Fallback theme color map                      │
--- │  Creator           │  UI factory, tweening, drag, theming engine    │
--- │  Localization      │  Translation / locale system                   │
--- │  Notifications     │  Toast notification UI                         │
--- │  BitLib            │  XOR / bitwise utilities (for key hashing)     │
--- │  HttpUtil          │  HTTP helper (key system POST requests)        │
--- │  LuarmorAPI        │  Luarmor license key validator                 │
--- │  JunkieAPI         │  JunkieProtected license key validator         │
--- │  KeyServices       │  Key-service registry (Platoboost, Luarmor…)  │
--- │  VersionJSON       │  Embedded package.json (version string)        │
--- │  ToggleElement     │  Toggle UI element                             │
--- │  InputElement      │  Text-input UI element                         │
--- │  DropdownElement   │  Dropdown list UI element                      │
--- │  KeySystemUI       │  Key-system gate screen                        │
--- │  ColorUtils        │  Color-range mapping utilities                 │
--- │  AcrylicBlur       │  Acrylic blur effect (low-level)               │
--- │  AcrylicPaint      │  Acrylic paint layer                           │
--- │  Acrylic           │  High-level acrylic enable/disable             │
--- │  Popup             │  Modal popup dialog                            │
--- │  Themes            │  Built-in theme definitions (Dark, Light, …)  │
--- │  SliderElement     │  Slider UI element                             │
--- │  TooltipElement    │  Tooltip UI element                            │
--- │  CheckboxElement   │  Checkbox UI element                           │
--- │  AnimationUtil     │  Render-step animation helpers                 │
--- │  ParagraphElement  │  Paragraph text element                        │
--- │  ButtonElement     │  Button element                                │
--- │  ToggleUI          │  Toggle widget (used by ElementsRegistry)      │
--- │  SliderUI          │  Slider widget                                 │
--- │  KeybindElement    │  Keybind capture element                       │
--- │  TextInputElement  │  Text-input widget                             │
--- │  DividerElement    │  Visual divider                                │
--- │  DropdownUI        │  Dropdown widget                               │
--- │  CodeEditorElement │  Syntax-highlighted code editor                │
--- │  CodeElement       │  Read-only code display                        │
--- │  ColorpickerElement│  Color picker widget                           │
--- │  SectionElement    │  Collapsible section                           │
--- │  SpaceElement      │  Empty space / gap                             │
--- │  ImageElement      │  Image element                                 │
--- │  GroupElement      │  Horizontal element group                      │
--- │  HStackElement     │  Horizontal stack layout                       │
--- │  VStackElement     │  Vertical stack layout                         │
--- │  ElementsRegistry  │  Maps element names → module factories         │
--- │  TabModule         │  Tab panel system                              │
--- │  SearchElement     │  Search-bar element                            │
--- │  DefaultIconNames  │  Default icon name → lucide key mapping        │
--- │  SearchBar         │  Window search bar widget                      │
--- │  Window            │  Top-level window constructor                  │
--- └────────────────────┴────────────────────────────────────────────────┘
-
-local Modules
-Modules = {
+local a
+a = {
 	cache = {},
 	load = function(b)
-		if not Modules.cache[b] then
-			Modules.cache[b] = { c = Modules[moduleKey]() }
+		if not a.cache[b] then
+			a.cache[b] = { c = a[b]() }
 		end
-		return Modules.cache[b].c
+		return a.cache[b].c
 	end,
 }
 do
-	function Modules.Icons()
+	function a.a()
 		local b = (cloneref or clonereference or function(b)
 			return b
 		end)
@@ -303,7 +245,7 @@ do
 
 		return d
 	end
-	function Modules.DefaultThemeColors()
+	function a.b()
 		return function(b)
 			return {
 
@@ -420,7 +362,7 @@ do
 			}
 		end
 	end
-	function Modules.Creator()
+	function a.c()
 		local b = (cloneref or clonereference or function(b)
 			return b
 		end)
@@ -437,7 +379,7 @@ d.Heartbeat
 
 		local l
 		if d:IsStudio() or not writefile then
-			l = Modules.load("Icons")
+			l = a.load("a")
 		else
 			l = loadstring(game.HttpGetAsync and game:HttpGetAsync(j) or h:GetAsync(j))()
 		end
@@ -554,7 +496,7 @@ d.Heartbeat
 		function p.Init(r)
 			m = r
 
-			p.ThemeFallbacks = Modules.load("DefaultThemeColors")(p)
+			p.ThemeFallbacks = a.load("b")(p)
 		end
 
 		function p.AddSignal(r, u)
@@ -1317,7 +1259,7 @@ d.Heartbeat
 
 		return p
 	end
-	function Modules.Localization()
+	function a.d()
 		local b = {}
 
 		function b.New(d, e, f)
@@ -1335,8 +1277,8 @@ d.Heartbeat
 
 		return b
 	end
-	function Modules.Notifications()
-		local b = Modules.load("Creator")
+	function a.e()
+		local b = a.load("c")
 		local d = b.New
 		local e = b.Tween
 
@@ -1594,7 +1536,7 @@ d.Heartbeat
 
 		return f
 	end
-	function Modules.BitLib()
+	function a.f()
 		local b = 4294967296
 		local d = b - 1
 		local function c(e, f)
@@ -2368,7 +2310,7 @@ d.Heartbeat
 
 		return X
 	end
-	function Modules.HttpUtil()
+	function a.g()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
@@ -2450,7 +2392,7 @@ d.Heartbeat
 
 		return ac
 	end
-	function Modules.LuarmorAPI()
+	function a.h()
 		local aa = {}
 
 		function aa.New(ab, ac)
@@ -2487,7 +2429,7 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.JunkieAPI()
+	function a.i()
 		local aa = {}
 
 		function aa.New(ab, ac, ad)
@@ -2542,39 +2484,39 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.KeyServices()
+	function a.j()
 		return {
 			platoboost = {
 				Name = "Platoboost",
 				Icon = "rbxassetid://75920162824531",
 				Args = { "ServiceId", "Secret" },
 
-				New = Modules.load("BitLib").New,
+				New = a.load("f").New,
 			},
 			pandadevelopment = {
 				Name = "Panda Development",
 				Icon = "panda",
 				Args = { "ServiceId" },
 
-				New = Modules.load("HttpUtil").New,
+				New = a.load("g").New,
 			},
 			luarmor = {
 				Name = "Luarmor",
 				Icon = "rbxassetid://130918283130165",
 				Args = { "ScriptId", "Discord" },
 
-				New = Modules.load("LuarmorAPI").New,
+				New = a.load("h").New,
 			},
 			junkiedevelopment = {
 				Name = "Junkie Development",
 				Icon = "rbxassetid://106310347705078",
 				Args = { "ServiceId", "ApiKey", "Provider" },
 
-				New = Modules.load("JunkieAPI").New,
+				New = a.load("i").New,
 			},
 		}
 	end
-	function Modules.VersionJSON()
+	function a.k()
 		return [[
 {
     "name": "windui",
@@ -2608,10 +2550,10 @@ d.Heartbeat
 }
 ]]
 	end
-	function Modules.ToggleElement()
+	function a.l()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -2736,10 +2678,10 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.InputElement()
+	function a.m()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -2847,8 +2789,8 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.DropdownElement()
-		local aa = Modules.load("Creator")
+	function a.n()
+		local aa = a.load("c")
 		local ab = aa.New
 		local ac = aa.Tween
 
@@ -2998,18 +2940,18 @@ d.Heartbeat
 
 		return ad
 	end
-	function Modules.KeySystemUI()
+	function a.o()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
-		local ae = Modules.load("ToggleElement").New
-		local af = Modules.load("InputElement").New
+		local ae = a.load("l").New
+		local af = a.load("m").New
 
 		function aa.new(ag, ah, ai, aj)
-			local ak = Modules.load("DropdownElement")
+			local ak = a.load("n")
 			local al = ak.Create(true, "Popup", ag.Window, ag.WindUI, ag.WindUI.ScreenGui.KeySystem)
 
 			local am = {}
@@ -3475,7 +3417,7 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.ColorUtils()
+	function a.p()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
@@ -3496,15 +3438,15 @@ d.Heartbeat
 
 		return { viewportPointToWorld, getOffset }
 	end
-	function Modules.AcrylicBlur()
+	function a.q()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 
-		local ad, ae = unpack(Modules.load("ColorUtils"))
+		local ad, ae = unpack(a.load("p"))
 		local af = Instance.new("Folder", aa(game:GetService("Workspace")).CurrentCamera)
 
 		local function createAcrylic()
@@ -3637,9 +3579,9 @@ d.Heartbeat
 			return ah
 		end
 	end
-	function Modules.AcrylicPaint()
-		local aa = Modules.load("Creator")
-		local ab = Modules.load("AcrylicBlur")
+	function a.r()
+		local aa = a.load("c")
+		local ab = a.load("q")
 
 		local ac = aa.New
 
@@ -3727,15 +3669,15 @@ d.Heartbeat
 			return ae, af
 		end
 	end
-	function Modules.Acrylic()
+	function a.s()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
 
 		local ab = {
-			AcrylicBlur = Modules.load("AcrylicBlur"),
+			AcrylicBlur = a.load("q"),
 
-			AcrylicPaint = Modules.load("AcrylicPaint"),
+			AcrylicPaint = a.load("r"),
 		}
 
 		function ab.init()
@@ -3784,10 +3726,10 @@ d.Heartbeat
 
 		return ab
 	end
-	function Modules.Popup()
+	function a.t()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -3803,7 +3745,7 @@ d.Heartbeat
 				IconSize = 22,
 			}
 
-			local ah = Modules.load("DropdownElement")
+			local ah = a.load("n")
 			local ai = ah.Create(true, "Popup", ae.WindUI.Window, ae.WindUI, af)
 
 			local aj = 200
@@ -3958,7 +3900,7 @@ d.Heartbeat
 				}),
 			})
 
-			local as = Modules.load("ToggleElement").New
+			local as = a.load("l").New
 
 			for at, au in next, ag.Buttons do
 				as(au.Title, au.Icon, au.Callback, au.Variant, aq, ai)
@@ -3971,7 +3913,7 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.Themes()
+	function a.u()
 		return function(aa, ab)
 			return {
 				Dark = {
@@ -4343,10 +4285,10 @@ d.Heartbeat
 			}
 		end
 	end
-	function Modules.SliderElement()
+	function a.v()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -4431,7 +4373,7 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.TooltipElement()
+	function a.w()
 		local aa = {}
 
 		local ab = (cloneref or clonereference or function(ab)
@@ -4440,7 +4382,7 @@ d.Heartbeat
 
 		local ac = ab(game:GetService("UserInputService"))
 
-		local ad = Modules.load("Creator")
+		local ad = a.load("c")
 		local ae = ad.New
 		local af = ad.Tween
 
@@ -4627,10 +4569,10 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.CheckboxElement()
+	function a.x()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -4792,7 +4734,7 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.AnimationUtil()
+	function a.y()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
@@ -5178,10 +5120,10 @@ d.Heartbeat
 
 		return ae
 	end
-	function Modules.SearchBarElement()
+	function a.z()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -5424,10 +5366,10 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.SectionTitleElement()
+	function a.A()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -5580,9 +5522,9 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.WindowSearchBar()
+	function a.B()
 		game:GetService("ReplicatedStorage")
-		local aa = Modules.load("Creator")
+		local aa = a.load("c")
 		local ab = aa.New
 		local ac = aa.NewRoundFrame
 		local ad = aa.Tween
@@ -6259,13 +6201,13 @@ d.Heartbeat
 			return ag
 		end
 	end
-	function Modules.ParagraphElement()
-		local aa = Modules.load("Creator")
+	function a.C()
+		local aa = a.load("c")
 		local ab = aa.New
 
 		local ac = {}
 
-		local ad = Modules.load("ToggleElement").New
+		local ad = a.load("l").New
 
 		function ac.New(ae, af)
 			af.Hover = false
@@ -6280,7 +6222,7 @@ d.Heartbeat
 
 				Locked = af.Locked or false,
 			}
-			local ah = Modules.load("WindowSearchBar")(af)
+			local ah = a.load("B")(af)
 
 			ag.ParagraphFrame = ah
 			if af.Buttons and #af.Buttons > 0 then
@@ -6308,8 +6250,8 @@ d.Heartbeat
 
 		return ac
 	end
-	function Modules.ButtonElement()
-		local aa = Modules.load("Creator")
+	function a.D()
+		local aa = a.load("c")
 		local ab = aa.New
 
 		local ac = {}
@@ -6332,7 +6274,7 @@ d.Heartbeat
 
 			local ag = true
 
-			af.ButtonFrame = Modules.load("WindowSearchBar")({
+			af.ButtonFrame = a.load("B")({
 				Title = af.Title,
 				Desc = af.Desc,
 				Parent = ae.Parent,
@@ -6389,10 +6331,10 @@ d.Heartbeat
 
 		return ac
 	end
-	function Modules.BaseInputElement()
+	function a.E()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -6776,10 +6718,10 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.LabelElement()
+	function a.F()
 		local aa = {}
 
-		local ab = Modules.load("Creator")
+		local ab = a.load("c")
 		local ac = ab.New
 		local ad = ab.Tween
 
@@ -6854,13 +6796,13 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.ToggleUI()
-		local aa = Modules.load("Creator")
+	function a.G()
+		local aa = a.load("c")
 		local ab = aa.New
 		local ac = aa.Tween
 
-		local ad = Modules.load("BaseInputElement").New
-		local ae = Modules.load("LabelElement").New
+		local ad = a.load("E").New
+		local ae = a.load("F").New
 
 		local af = {}
 
@@ -6878,7 +6820,7 @@ d.Heartbeat
 				Callback = ah.Callback or function() end,
 				UIElements = {},
 			}
-			ai.ToggleFrame = Modules.load("WindowSearchBar")({
+			ai.ToggleFrame = a.load("B")({
 				Title = ai.Title,
 				Desc = ai.Desc,
 
@@ -6966,7 +6908,7 @@ d.Heartbeat
 
 		return af
 	end
-	function Modules.SliderUI()
+	function a.H()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
@@ -6974,7 +6916,7 @@ d.Heartbeat
 		local ac = aa(game:GetService("UserInputService"))
 		local ad = aa(game:GetService("RunService"))
 
-		local ae = Modules.load("Creator")
+		local ae = a.load("c")
 		local af = ae.New
 		local ag = ae.Tween
 
@@ -7073,7 +7015,7 @@ d.Heartbeat
 					aw = aw + al.IconSize - 2
 				end
 			end
-			al.SliderFrame = Modules.load("WindowSearchBar")({
+			al.SliderFrame = a.load("B")({
 				Title = al.Title,
 				Desc = al.Desc,
 				Parent = ak.Parent,
@@ -7166,7 +7108,7 @@ d.Heartbeat
 
 			local ax
 			if al.IsTooltip then
-				ax = Modules.load("SectionTitleElement").New(ap, al.UIElements.SliderIcon.Frame.Thumb, true, "Secondary", "Small", false)
+				ax = a.load("A").New(ap, al.UIElements.SliderIcon.Frame.Thumb, true, "Secondary", "Small", false)
 				ax.Container.AnchorPoint = Vector2.new(0.5, 1)
 				ax.Container.Position = UDim2.new(0.5, 0, 0, -8)
 			end
@@ -7385,14 +7327,14 @@ d.Heartbeat
 
 		return ah
 	end
-	function Modules.KeybindElement()
+	function a.I()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
 
 		local ac = aa(game:GetService("UserInputService"))
 
-		local ad = Modules.load("Creator")
+		local ad = a.load("c")
 		local ae = ad.New
 		local af = ad.Tween
 
@@ -7401,7 +7343,7 @@ d.Heartbeat
 			UIPadding = 8,
 		}
 
-		local ah = Modules.load("SliderElement").New
+		local ah = a.load("v").New
 
 		function ag.New(ai, aj)
 			local function NormalizeKeyCode(ak)
@@ -7429,7 +7371,7 @@ d.Heartbeat
 
 			local al = true
 
-			ak.KeybindFrame = Modules.load("WindowSearchBar")({
+			ak.KeybindFrame = a.load("B")({
 				Title = ak.Title,
 				Desc = ak.Desc,
 				Parent = aj.Parent,
@@ -7547,8 +7489,8 @@ d.Heartbeat
 
 		return ag
 	end
-	function Modules.TextInputElement()
-		local aa = Modules.load("Creator")
+	function a.J()
+		local aa = a.load("c")
 		local ac = aa.New
 		local ad = aa.Tween
 
@@ -7556,9 +7498,9 @@ d.Heartbeat
 			UICorner = 8,
 			UIPadding = 8,
 		}
-		local af = Modules.load("ToggleElement")
+		local af = a.load("l")
 .New
-		local ag = Modules.load("InputElement").New
+		local ag = a.load("m").New
 
 		function ae.New(ah, ai)
 			local aj = {
@@ -7580,7 +7522,7 @@ d.Heartbeat
 
 			local ak = true
 
-			aj.InputFrame = Modules.load("WindowSearchBar")({
+			aj.InputFrame = a.load("B")({
 				Title = aj.Title,
 				Desc = aj.Desc,
 				Parent = ai.Parent,
@@ -7657,8 +7599,8 @@ d.Heartbeat
 
 		return ae
 	end
-	function Modules.DividerElement()
-		local aa = Modules.load("Creator")
+	function a.K()
+		local aa = a.load("c")
 		local ac = aa.New
 
 		local ae = {}
@@ -7686,7 +7628,7 @@ d.Heartbeat
 
 		return ae
 	end
-	function Modules.ColorPickerUtil()
+	function a.L()
 		local aa = {}
 
 		local ac = (cloneref or clonereference or function(ac)
@@ -7699,9 +7641,9 @@ d.Heartbeat
 
 		local ah = workspace.CurrentCamera
 
-		local ai = Modules.load("InputElement").New
+		local ai = a.load("m").New
 
-		local aj = Modules.load("Creator")
+		local aj = a.load("c")
 		local ak = aj.New
 		local al = aj.Tween
 
@@ -8180,7 +8122,7 @@ d.Heartbeat
 						RecalculateCanvasSize()
 						RecalculateListSize()
 					else
-						Modules.load("DividerElement"):New({ Parent = an.UIElements.Menu.Frame.ScrollingFrame })
+						a.load("K"):New({ Parent = an.UIElements.Menu.Frame.ScrollingFrame })
 					end
 				end
 
@@ -8296,7 +8238,7 @@ d.Heartbeat
 
 		return aa
 	end
-	function Modules.DropdownUI()
+	function a.M()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
@@ -8305,13 +8247,13 @@ d.Heartbeat
 		aa(game:GetService("Players")).LocalPlayer:GetMouse()
 		local ac = aa(game:GetService("Workspace")).CurrentCamera
 
-		local ae = Modules.load("Creator")
+		local ae = a.load("c")
 		local af = ae.New
 		local ag = ae.Tween
 
-		local ah = Modules.load("SliderElement").New
-		local ai = Modules.load("InputElement").New
-		local aj = Modules.load("ColorPickerUtil").New
+		local ah = a.load("v").New
+		local ai = a.load("m").New
+		local aj = a.load("L").New
 		local ak = 
 workspace.CurrentCamera
 
@@ -8357,7 +8299,7 @@ workspace.CurrentCamera
 
 			local ap = true
 
-			ao.DropdownFrame = Modules.load("WindowSearchBar")({
+			ao.DropdownFrame = a.load("B")({
 				Title = ao.Title,
 				Desc = ao.Desc,
 				Parent = an.Parent,
@@ -8424,7 +8366,7 @@ workspace.CurrentCamera
 
 		return al
 	end
-	function Modules.CodeEditorElement()
+	function a.N()
 		local aa = {}
 		local ae = {
 			lua = {
@@ -8665,14 +8607,14 @@ workspace.CurrentCamera
 
 		return aa
 	end
-	function Modules.BaseCodeElement()
+	function a.O()
 		local aa = {}
 
-		local ae = Modules.load("Creator")
+		local ae = a.load("c")
 		local af = ae.New
 		local ah = ae.Tween
 
-		local aj = Modules.load("CodeEditorElement")
+		local aj = a.load("N")
 
 		function aa.New(ak, al, am, an, ao)
 			local ap = {
@@ -8861,11 +8803,11 @@ workspace.CurrentCamera
 
 		return aa
 	end
-	function Modules.CodeElement()
-		local aa = Modules.load("Creator")
+	function a.P()
+		local aa = a.load("c")
 		local ae = aa.New
 
-		local af = Modules.load("BaseCodeElement")
+		local af = a.load("O")
 
 		local ah = {}
 
@@ -8921,8 +8863,8 @@ workspace.CurrentCamera
 
 		return ah
 	end
-	function Modules.ColorpickerElement()
-		local aa = Modules.load("Creator")
+	function a.Q()
+		local aa = a.load("c")
 		local ae = aa.New
 		local af = aa.Tween
 
@@ -8939,8 +8881,8 @@ workspace.CurrentCamera
 		local an = al.LocalPlayer
 		local ao = an:GetMouse()
 
-		local ap = Modules.load("ToggleElement").New
-		local aq = Modules.load("InputElement").New
+		local ap = a.load("l").New
+		local aq = a.load("m").New
 
 		local ar = {
 			UICorner = 9,
@@ -8968,7 +8910,7 @@ workspace.CurrentCamera
 
 			ax:SetHSVFromRGB(ax.Default)
 
-			local ay = Modules.load("DropdownElement")
+			local ay = a.load("n")
 			local az = ay.Create(nil, "Dialog", au, av, au.UIElements.Main.Main)
 
 			ax.ColorpickerFrame = az
@@ -9544,7 +9486,7 @@ workspace.CurrentCamera
 
 			local av = true
 
-			au.ColorpickerFrame = Modules.load("WindowSearchBar")({
+			au.ColorpickerFrame = a.load("B")({
 				Title = au.Title,
 				Desc = au.Desc,
 				Parent = at.Parent,
@@ -9613,8 +9555,8 @@ workspace.CurrentCamera
 
 		return ar
 	end
-	function Modules.SectionElement()
-		local aa = Modules.load("Creator")
+	function a.R()
+		local aa = a.load("c")
 		local ae = aa.New
 		local af = aa.Tween
 
@@ -9950,8 +9892,8 @@ workspace.CurrentCamera
 
 		return ah
 	end
-	function Modules.SpaceElement()
-		local aa = Modules.load("Creator")
+	function a.S()
+		local aa = a.load("c")
 		local ae = aa.New
 
 		local af = {}
@@ -9969,8 +9911,8 @@ workspace.CurrentCamera
 
 		return af
 	end
-	function Modules.ImageElement()
-		local aa = Modules.load("Creator")
+	function a.T()
+		local aa = a.load("c")
 		local ae = aa.New
 
 		local af = {}
@@ -10022,8 +9964,8 @@ workspace.CurrentCamera
 
 		return af
 	end
-	function Modules.GroupElement()
-		local aa = Modules.load("Creator")
+	function a.U()
+		local aa = a.load("c")
 		local ae = aa.New
 
 		local af = {}
@@ -10099,8 +10041,8 @@ workspace.CurrentCamera
 
 		return af
 	end
-	function Modules.HStackElement()
-		local aa = Modules.load("Creator")
+	function a.V()
+		local aa = a.load("c")
 		local ae = aa.New
 
 		local af = {}
@@ -10191,8 +10133,8 @@ workspace.CurrentCamera
 
 		return af
 	end
-	function Modules.VStackElement()
-		local aa = Modules.load("Creator")
+	function a.W()
+		local aa = a.load("c")
 		local ae = aa.New
 
 		local af = {}
@@ -10228,25 +10170,25 @@ workspace.CurrentCamera
 
 		return af
 	end
-	function Modules.ElementsRegistry()
+	function a.X()
 		return {
 			Elements = {
-				Paragraph = Modules.load("ParagraphElement"),
-				Button = Modules.load("ButtonElement"),
-				Toggle = Modules.load("ToggleUI"),
-				Slider = Modules.load("SliderUI"),
-				Keybind = Modules.load("KeybindElement"),
-				Input = Modules.load("TextInputElement"),
-				Dropdown = Modules.load("DropdownUI"),
-				Code = Modules.load("CodeElement"),
-				Colorpicker = Modules.load("ColorpickerElement"),
-				Section = Modules.load("SectionElement"),
-				Divider = Modules.load("DividerElement"),
-				Space = Modules.load("SpaceElement"),
-				Image = Modules.load("ImageElement"),
-				Group = Modules.load("GroupElement"),
-				HStack = Modules.load("HStackElement"),
-				VStack = Modules.load("VStackElement"),
+				Paragraph = a.load("C"),
+				Button = a.load("D"),
+				Toggle = a.load("G"),
+				Slider = a.load("H"),
+				Keybind = a.load("I"),
+				Input = a.load("J"),
+				Dropdown = a.load("M"),
+				Code = a.load("P"),
+				Colorpicker = a.load("Q"),
+				Section = a.load("R"),
+				Divider = a.load("K"),
+				Space = a.load("S"),
+				Image = a.load("T"),
+				Group = a.load("U"),
+				HStack = a.load("V"),
+				VStack = a.load("W"),
 			},
 			Load = function(aa, ae, af, ah, aj, ak, al, am, an)
 				for ao, ap in next, af do
@@ -10370,7 +10312,7 @@ as, at = ap:New(ar)
 			end,
 		}
 	end
-	function Modules.TabModule()
+	function a.Y()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
@@ -10380,11 +10322,11 @@ as, at = ap:New(ar)
 		aa(game:GetService("UserInputService"))
 		local af = ae.LocalPlayer:GetMouse()
 
-		local ah = Modules.load("Creator")
+		local ah = a.load("c")
 		local aj = ah.New
 
-		local ak = Modules.load("SectionTitleElement").New
-		local al = Modules.load("TooltipElement").New
+		local ak = a.load("A").New
+		local al = a.load("w").New
 
 		local am = {
 
@@ -10756,7 +10698,7 @@ as, at = ap:New(ar)
 				return ap
 			end
 
-			local ay = Modules.load("ElementsRegistry")
+			local ay = a.load("X")
 
 			ay.Load(ap, ap.UIElements.ContainerFrame, ay.Elements, Window, WindUI, nil, ay, ao, ap)
 
@@ -10924,14 +10866,14 @@ as, at = ap:New(ar)
 
 		return am
 	end
-	function Modules.SearchElement()
+	function a.Z()
 		local aa = {}
 
-		local ae = Modules.load("Creator")
+		local ae = a.load("c")
 		local af = ae.New
 		local ah = ae.Tween
 
-		local aj = Modules.load("TabModule")
+		local aj = a.load("Y")
 
 		function aa.New(ak, al, am, an, ao)
 			local ap = {
@@ -11082,7 +11024,7 @@ as, at = ap:New(ar)
 
 		return aa
 	end
-	function Modules.DefaultIconNames()
+	function a._()
 		return {
 			Tab = "table-of-contents",
 			Paragraph = "type",
@@ -11096,7 +11038,7 @@ as, at = ap:New(ar)
 			Colorpicker = "palette",
 		}
 	end
-	function Modules.SearchBar()
+	function a.aa()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
@@ -11108,7 +11050,7 @@ as, at = ap:New(ar)
 			Padding = 9,
 		}
 
-		local af = Modules.load("Creator")
+		local af = a.load("c")
 		local ah = af.New
 		local aj = af.Tween
 
@@ -11120,7 +11062,7 @@ as, at = ap:New(ar)
 				Width = 400,
 				MaxHeight = 380,
 
-				Icons = Modules.load("DefaultIconNames"),
+				Icons = a.load("_"),
 			}
 
 			local ao = ah("TextBox", {
@@ -11600,7 +11542,7 @@ as, at = ap:New(ar)
 
 		return ae
 	end
-	function Modules.Window()
+	function a.ab()
 		local aa = (cloneref or clonereference or function(aa)
 			return aa
 		end)
@@ -11611,18 +11553,18 @@ as, at = ap:New(ar)
 
 		local aj = workspace.CurrentCamera
 
-		local ak = Modules.load("Acrylic")
+		local ak = a.load("s")
 
-		local al = Modules.load("Creator")
+		local al = a.load("c")
 		local am = al.New
 		local an = al.Tween
 
-		local ao = Modules.load("SliderElement").New
-		local ap = Modules.load("ToggleElement").New
-		local aq = Modules.load("TooltipElement").New
-		local ar = Modules.load("CheckboxElement")
+		local ao = a.load("v").New
+		local ap = a.load("l").New
+		local aq = a.load("w").New
+		local ar = a.load("x")
 
-		local as = Modules.load("AnimationUtil")
+		local as = a.load("y")
 
 		return function(at)
 			local au = {
@@ -12573,7 +12515,7 @@ as, at = ap:New(ar)
 				})
 			end
 
-			au.OpenButtonMain = Modules.load("SearchBarElement").New(au)
+			au.OpenButtonMain = a.load("z").New(au)
 
 			task.spawn(function()
 				if au.Icon then
@@ -13048,8 +12990,8 @@ as, at = ap:New(ar)
 				au:EditOpenButton(au.OpenButton)
 			end
 
-			local z = Modules.load("TabModule")
-			local A = Modules.load("SearchElement")
+			local z = a.load("Y")
+			local A = a.load("Z")
 			local B = z.Init(au, at.WindUI, at.WindUI.TooltipGui)
 			B:OnChange(function(C)
 				au.CurrentTab = C
@@ -13114,7 +13056,7 @@ as, at = ap:New(ar)
 				return G
 			end
 
-			local C = Modules.load("DropdownElement")
+			local C = a.load("n")
 			function au.Dialog(F, G)
 				local H = {
 					Title = G.Title or "Dialog",
@@ -13405,7 +13347,7 @@ as, at = ap:New(ar)
 			end)
 
 			if not au.HideSearchBar then
-				local M = Modules.load("SearchBar")
+				local M = a.load("aa")
 				local N = false
 
 				local O = ao("Search", "search", au.UIElements.SideBarContainer, true)
@@ -13449,12 +13391,12 @@ as, at = ap:New(ar)
 	end
 end
 
-local WindUI = {
+local aa = {
 	Window = nil,
 	Theme = nil,
-	Creator = Modules.load("Creator"),
-	LocalizationModule = Modules.load("Localization"),
-	NotificationModule = Modules.load("Notifications"),
+	Creator = a.load("c"),
+	LocalizationModule = a.load("d"),
+	NotificationModule = a.load("e"),
 	Themes = nil,
 	Transparent = false,
 
@@ -13465,7 +13407,7 @@ local WindUI = {
 	ConfigManager = nil,
 	Version = "0.0.0",
 
-	Services = Modules.load("KeyServices"),
+	Services = a.load("j"),
 
 	OnThemeChangeFunction = nil,
 
@@ -13473,179 +13415,179 @@ local WindUI = {
 	UIScaleObj = nil,
 }
 
-local cloneRef = (cloneref or clonereference or function(cloneRef)
-	return cloneRef
+local ae = (cloneref or clonereference or function(ae)
+	return ae
 end)
 
-WindUI.cloneref = cloneRef
+aa.cloneref = ae
 
-local HttpService = cloneRef(game:GetService("HttpService"))
-local Players = cloneRef(game:GetService("Players"))
-local CoreGui = cloneRef(game:GetService("CoreGui"))
-local RunService = cloneRef(game:GetService("RunService"))
+local af = ae(game:GetService("HttpService"))
+local ah = ae(game:GetService("Players"))
+local aj = ae(game:GetService("CoreGui"))
+local ak = ae(game:GetService("RunService"))
 
-local LocalPlayer = Players.LocalPlayer or nil
+local al = ah.LocalPlayer or nil
 
-local versionData = HttpService:JSONDecode(Modules.load("VersionJSON"))
-if versionData then
-	WindUI.Version = versionData.version
+local am = af:JSONDecode(a.load("k"))
+if am then
+	aa.Version = am.version
 end
 
-local KeySystemUI = Modules.load("KeySystemUI")
+local an = a.load("o")
 
-local Creator = WindUI.Creator
+local ao = aa.Creator
 
-local New = Creator.New
+local ap = ao.New
 
-local AcrylicModule = Modules.load("Acrylic")
+local aq = a.load("s")
 
-local protectGui = protectgui or (syn and syn.protect_gui) or function() end
+local ar = protectgui or (syn and syn.protect_gui) or function() end
 
-local guiParent = gethui and gethui() or (CoreGui or LocalPlayer:WaitForChild("PlayerGui"))
+local as = gethui and gethui() or (aj or al:WaitForChild("PlayerGui"))
 
-local uiScaleObj = New("UIScale", {
-	Scale = WindUI.UIScale,
+local at = ap("UIScale", {
+	Scale = aa.UIScale,
 })
 
-WindUI.UIScaleObj = uiScaleObj
+aa.UIScaleObj = at
 
-WindUI.ScreenGui = New("ScreenGui", {
+aa.ScreenGui = ap("ScreenGui", {
 	Name = "WindUI",
-	Parent = guiParent,
+	Parent = as,
 	IgnoreGuiInset = true,
 	ScreenInsets = "None",
 	DisplayOrder = -99999,
 }, {
 
-	New("Folder", {
+	ap("Folder", {
 		Name = "Window",
 	}),
 
-	New("Folder", {
+	ap("Folder", {
 		Name = "KeySystem",
 	}),
-	New("Folder", {
+	ap("Folder", {
 		Name = "Popups",
 	}),
-	New("Folder", {
+	ap("Folder", {
 		Name = "ToolTips",
 	}),
 })
 
-WindUI.NotificationGui = New("ScreenGui", {
+aa.NotificationGui = ap("ScreenGui", {
 	Name = "WindUI/Notifications",
-	Parent = guiParent,
+	Parent = as,
 	IgnoreGuiInset = true,
 })
-WindUI.DropdownGui = New("ScreenGui", {
+aa.DropdownGui = ap("ScreenGui", {
 	Name = "WindUI/Dropdowns",
-	Parent = guiParent,
+	Parent = as,
 	IgnoreGuiInset = true,
 })
-WindUI.TooltipGui = New("ScreenGui", {
+aa.TooltipGui = ap("ScreenGui", {
 	Name = "WindUI/Tooltips",
-	Parent = guiParent,
+	Parent = as,
 	IgnoreGuiInset = true,
 })
-protectGui(WindUI.ScreenGui)
-protectGui(WindUI.NotificationGui)
-protectGui(WindUI.DropdownGui)
-protectGui(WindUI.TooltipGui)
+ar(aa.ScreenGui)
+ar(aa.NotificationGui)
+ar(aa.DropdownGui)
+ar(aa.TooltipGui)
 
-Creator.Init(WindUI)
+ao.Init(aa)
 
-function WindUI.SetParent(au, av)
-	if WindUI.ScreenGui then
-		WindUI.ScreenGui.Parent = av
+function aa.SetParent(au, av)
+	if aa.ScreenGui then
+		aa.ScreenGui.Parent = av
 	end
-	if WindUI.NotificationGui then
-		WindUI.NotificationGui.Parent = av
+	if aa.NotificationGui then
+		aa.NotificationGui.Parent = av
 	end
-	if WindUI.DropdownGui then
-		WindUI.DropdownGui.Parent = av
+	if aa.DropdownGui then
+		aa.DropdownGui.Parent = av
 	end
-	if WindUI.TooltipGui then
-		WindUI.TooltipGui.Parent = av
+	if aa.TooltipGui then
+		aa.TooltipGui.Parent = av
 	end
 end
-math.clamp(WindUI.TransparencyValue, 0, 1)
+math.clamp(aa.TransparencyValue, 0, 1)
 
-local au = WindUI.NotificationModule.Init(WindUI.NotificationGui)
+local au = aa.NotificationModule.Init(aa.NotificationGui)
 
-function WindUI.Notify(av, aw)
+function aa.Notify(av, aw)
 	aw.Holder = au.Frame
-	aw.Window = WindUI.Window
+	aw.Window = aa.Window
 
-	return WindUI.NotificationModule.New(aw)
+	return aa.NotificationModule.New(aw)
 end
 
-function WindUI.SetNotificationLower(av, aw)
+function aa.SetNotificationLower(av, aw)
 	au.SetLower(aw)
 end
 
-function WindUI.SetFont(av, aw)
-	Creator.UpdateFont(aw)
+function aa.SetFont(av, aw)
+	ao.UpdateFont(aw)
 end
 
-function WindUI.OnThemeChange(av, aw)
-	WindUI.OnThemeChangeFunction = aw
+function aa.OnThemeChange(av, aw)
+	aa.OnThemeChangeFunction = aw
 end
 
-function WindUI.AddTheme(av, aw)
-	WindUI.Themes[aw.Name] = aw
+function aa.AddTheme(av, aw)
+	aa.Themes[aw.Name] = aw
 	return aw
 end
 
-function WindUI.SetTheme(av, aw)
-	if WindUI.Themes[aw] then
-		WindUI.Theme = WindUI.Themes[aw]
-		Creator.SetTheme(WindUI.Themes[aw])
+function aa.SetTheme(av, aw)
+	if aa.Themes[aw] then
+		aa.Theme = aa.Themes[aw]
+		ao.SetTheme(aa.Themes[aw])
 
-		if WindUI.OnThemeChangeFunction then
-			WindUI.OnThemeChangeFunction(aw)
+		if aa.OnThemeChangeFunction then
+			aa.OnThemeChangeFunction(aw)
 		end
 
-		return WindUI.Themes[aw]
+		return aa.Themes[aw]
 	end
 	return nil
 end
 
-function WindUI.GetThemes(av)
-	return WindUI.Themes
+function aa.GetThemes(av)
+	return aa.Themes
 end
-function WindUI.GetCurrentTheme(av)
-	return WindUI.Theme.Name
+function aa.GetCurrentTheme(av)
+	return aa.Theme.Name
 end
-function WindUI.GetTransparency(av)
-	return WindUI.Transparent or false
+function aa.GetTransparency(av)
+	return aa.Transparent or false
 end
-function WindUI.GetWindowSize(av)
-	return WindUI.Window.UIElements.Main.Size
+function aa.GetWindowSize(av)
+	return aa.Window.UIElements.Main.Size
 end
-function WindUI.Localization(av, aw)
-	return WindUI.LocalizationModule:New(aw, Creator)
+function aa.Localization(av, aw)
+	return aa.LocalizationModule:New(aw, ao)
 end
 
-function WindUI.SetLanguage(av, aw)
-	if Creator.Localization then
-		return Creator.SetLanguage(aw)
+function aa.SetLanguage(av, aw)
+	if ao.Localization then
+		return ao.SetLanguage(aw)
 	end
 	return false
 end
 
-function WindUI.ToggleAcrylic(av, aw)
-	if WindUI.Window and WindUI.Window.AcrylicPaint and WindUI.Window.AcrylicPaint.Model then
-		WindUI.Window.Acrylic = aw
-		WindUI.Window.AcrylicPaint.Model.Transparency = aw and 0.98 or 1
+function aa.ToggleAcrylic(av, aw)
+	if aa.Window and aa.Window.AcrylicPaint and aa.Window.AcrylicPaint.Model then
+		aa.Window.Acrylic = aw
+		aa.Window.AcrylicPaint.Model.Transparency = aw and 0.98 or 1
 		if aw then
-			AcrylicModule.Enable()
+			aq.Enable()
 		else
-			AcrylicModule.Disable()
+			aq.Disable()
 		end
 	end
 end
 
-function WindUI.Gradient(av, aw, ax)
+function aa.Gradient(av, aw, ax)
 	local ay = {}
 	local az = {}
 
@@ -13692,22 +13634,22 @@ function WindUI.Gradient(av, aw, ax)
 	return aA
 end
 
-function WindUI.Popup(av, aw)
-	aw.WindUI = WindUI
-	return Modules.load("Popup").new(aw, WindUI.ScreenGui.Popups)
+function aa.Popup(av, aw)
+	aw.WindUI = aa
+	return a.load("t").new(aw, aa.ScreenGui.Popups)
 end
 
-WindUI.Themes = Modules.load("Themes")(WindUI, Creator)
+aa.Themes = a.load("u")(aa, ao)
 
-Creator.Themes = WindUI.Themes
+ao.Themes = aa.Themes
 
-WindUI:SetTheme("Dark")
-WindUI:SetLanguage(Creator.Language)
+aa:SetTheme("Dark")
+aa:SetLanguage(ao.Language)
 
-function WindUI.CreateWindow(av, aw)
-	local ax = Modules.load("Window")
+function aa.CreateWindow(av, aw)
+	local ax = a.load("ab")
 
-	if not RunService:IsStudio() and writefile then
+	if not ak:IsStudio() and writefile then
 		if not isfolder("WindUI") then
 			makefolder("WindUI")
 		end
@@ -13718,23 +13660,23 @@ function WindUI.CreateWindow(av, aw)
 		end
 	end
 
-	aw.WindUI = WindUI
-	aw.Window = WindUI.Window
-	aw.Parent = WindUI.ScreenGui.Window
+	aw.WindUI = aa
+	aw.Window = aa.Window
+	aw.Parent = aa.ScreenGui.Window
 
-	if WindUI.Window then
+	if aa.Window then
 		warn("You cannot create more than one window")
 		return
 	end
 
 	local ay = true
 
-	local az = WindUI.Themes[aw.Theme or "Dark"]
+	local az = aa.Themes[aw.Theme or "Dark"]
 
-	Creator.SetTheme(az)
+	ao.SetTheme(az)
 
 	local aA = gethwid or function()
-		return Players.LocalPlayer.UserId
+		return ah.LocalPlayer.UserId
 	end
 
 	local aB = aA()
@@ -13783,7 +13725,7 @@ function WindUI.CreateWindow(av, aw)
 				local f = false
 
 				for g, h in next, aw.KeySystem.API do
-					local j = WindUI.Services[h.Type]
+					local j = aa.Services[h.Type]
 					if j then
 						local l = {}
 						for m, p in next, j.Args do
@@ -13815,14 +13757,14 @@ function WindUI.CreateWindow(av, aw)
 
 	local b = ax(aw)
 
-	WindUI.Transparent = aw.Transparent
-	WindUI.Window = b
+	aa.Transparent = aw.Transparent
+	aa.Window = b
 
 	if aw.Acrylic then
-		AcrylicModule.init()
+		aq.init()
 	end
 
 	return b
 end
 
-return WindUI
+return aa

@@ -29,7 +29,7 @@ Window:EditOpenButton({
 
 local Themes = {
     Kiyora = {
-        Icon = 8508980536,
+        Icon = 116206528865745,
         Variants = {
             ["Variant 1"]= {
                 {Title = "Helter Edge", Id = 8508980536, OverwriteId = 0}
@@ -40,9 +40,9 @@ local Themes = {
         }
     },
     Don = {
-        Icon = 8508980536,
+        Icon = 119919940978575,
         Variants = {
-            ["Default"]= {
+            ["Default"] = {
                 {Title = "Axel Avix", Id = 8508980536, OverwriteId = 0}
             },
             ["Overtime"]= {
